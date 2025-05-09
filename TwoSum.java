@@ -29,22 +29,28 @@ public class TwoSum {
 
 
 
-        HashMap<Integer, Integer> checker = new HashMap<>();
+        HashMap<Integer, Integer> checker = new HashMap<>(); //key value pair of Integer
 
         for(int i = 0; i < nums.length; i++){
             if(checker.containsKey(nums[i])){
-                return new int[]{ checker.get(nums[i]),i};
+                return new int[]{ checker.get(nums[i]),i};  //getting the  value of hashmap where the parent of the compliment is found index of the compliment where we are at
             }
-            checker.put(target- nums[i], i);
+            checker.put(target- nums[i], i); //putting the compliment as key and index where to find me as value
         }
         return null;
+
+        //may also be done using list<integer>
+        //list.get(i)
+        //list.size()
+        //return Array.asList(checker.get(nums[i]),)
+        //
 
     }
 
 
     public static void main(String[] args) {
-        int i = 6;
-        int []arr= {3,3};
+        int i = 9;
+        int []arr= {3,3,8,5,9,4};
         System.out.println(Arrays.toString(twoSum(arr, i)));
         System.out.println(Arrays.toString(twoSum2(arr, i)));
     }
