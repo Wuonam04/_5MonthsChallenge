@@ -27,7 +27,7 @@ public class MinCost {
     public static void main(String[] args) {
 
         int [] a = {1,100,1,1,1,100,1,1,100,1};
-        int [] b = {10,0,23};
+        int [] b = {4,10,23};
         System.out.println(minCostClimbingStairs(a));
         System.out.println(minCostClimbingStairs(b));
     }
