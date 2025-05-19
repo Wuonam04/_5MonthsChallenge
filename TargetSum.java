@@ -5,7 +5,7 @@ public class TargetSum {
 
     public static int targetSum(int [] nums, int target){
 
-        return recu(nums, nums.length - 1, target);   //stating from the last index
+        return recu(nums, nums.length-1, target);   //stating from the last index
 
     }
     public static int recu(int[] nums, int i, int target){
