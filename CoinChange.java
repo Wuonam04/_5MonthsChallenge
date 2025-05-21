@@ -7,7 +7,7 @@ public class CoinChange {
     //It has t be smaller or equal to the coin
 
     public static long getWays(int n, int [] arr){
-        return recu2(n, arr, arr.length-1);
+        return recu2(n, arr);
     }
 
     private static long recu( int n, int [] arr, int len){
@@ -28,43 +28,19 @@ public class CoinChange {
         return include + exclude;
 
     }
-    private static long recu2( int n, int [] arr, int len){
 
-        if(len < 0 || n < 0){
-            return 0;
-        }
-        if( n == 0){
-            return 1;
-        }
-        int count = 0;
+    public static long recu2(int n, int [] arr) {
 
-        int [] prev = new int[n+1];     //TODO check whether the first value not being 0 will affect the array. Ideally it should
-        Arrays.fill(prev, Integer.MAX_VALUE);   // previous array of size n with all values being big
-        prev[0] = 0;
+        long[] store = new long[n + 1];
+        store[0] = 1;
 
-        int [] curr = new int[n+1];
-        Arrays.fill(curr,Integer.MAX_VALUE);
-        curr[0] = 0;
-
-        for(int coin = 0; coin < len; coin++ ){  //indexes of coins
-            for(int  j = arr[coin]; j< n; j++){   //the actual coin che
-                if(arr[coin] > n){
-                    curr[j] = prev[j];
-                }
-                else{
-                    int a = prev[j];
-                    int b = 1 + curr[j- arr[coin]];   //moving back coin steps back
-                    /*System.out.println(a);
-                    System.out.println(b);*/
-                    curr[j] = Math.min(a,b);
-                    count++;    //we want to return the count rather
-
-                }
-
+        for (int coin : arr) {
+            for (int i = coin; i <= n; i++) {
+                store[i] += store[i - coin];
             }
-            prev = curr;
         }
-        return count-1;
+
+        return store[n];
     }
 
 
