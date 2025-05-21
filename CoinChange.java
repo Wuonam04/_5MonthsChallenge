@@ -33,6 +33,10 @@ public class CoinChange {
         if(len < 0 || n < 0){
             return 0;
         }
+        if( n == 0){
+            return 1;
+        }
+        int count = 0;
 
         int [] prev = new int[n+1];     //TODO check whether the first value not being 0 will affect the array. Ideally it should
         Arrays.fill(prev, Integer.MAX_VALUE);   // previous array of size n with all values being big
@@ -42,23 +46,25 @@ public class CoinChange {
         Arrays.fill(curr,Integer.MAX_VALUE);
         curr[0] = 0;
 
-        for(int coin = 0; coin < len; coin++ ){
-            for(int  j = arr[coin]; j<= n; j++){
+        for(int coin = 0; coin < len; coin++ ){  //indexes of coins
+            for(int  j = arr[coin]; j< n; j++){   //the actual coin che
                 if(arr[coin] > n){
                     curr[j] = prev[j];
                 }
                 else{
                     int a = prev[j];
-                    int b = 1 + curr[j- arr[coin]];
+                    int b = 1 + curr[j- arr[coin]];   //moving back coin steps back
                     /*System.out.println(a);
                     System.out.println(b);*/
                     curr[j] = Math.min(a,b);
+                    count++;    //we want to return the count rather
+
                 }
 
             }
             prev = curr;
         }
-        return curr[len];
+        return count-1;
     }
 
 
