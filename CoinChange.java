@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class CoinChange {
 
    /* Given an amount and the denominations of coins available, determine how many ways change can be made for amount. There is a limitless supply of each coin type.*/
@@ -5,7 +7,7 @@ public class CoinChange {
     //It has t be smaller or equal to the coin
 
     public static long getWays(int n, int [] arr){
-        return recu(n, arr, arr.length-1);
+        return recu2(n, arr, arr.length-1);
     }
 
     private static long recu( int n, int [] arr, int len){
@@ -26,11 +28,44 @@ public class CoinChange {
         return include + exclude;
 
     }
+    private static long recu2( int n, int [] arr, int len){
+
+        if(len < 0 || n < 0){
+            return 0;
+        }
+
+        int [] prev = new int[n+1];     //TODO check whether the first value not being 0 will affect the array. Ideally it should
+        Arrays.fill(prev, Integer.MAX_VALUE);   // previous array of size n with all values being big
+        prev[0] = 0;
+
+        int [] curr = new int[n+1];
+        Arrays.fill(curr,Integer.MAX_VALUE);
+        curr[0] = 0;
+
+        for(int coin = 0; coin < len; coin++ ){
+            for(int  j = arr[coin]; j<= n; j++){
+                if(arr[coin] > n){
+                    curr[j] = prev[j];
+                }
+                else{
+                    int a = prev[j];
+                    int b = 1 + curr[j- arr[coin]];
+                    /*System.out.println(a);
+                    System.out.println(b);*/
+                    curr[j] = Math.min(a,b);
+                }
+
+            }
+            prev = curr;
+        }
+        return curr[len];
+    }
+
 
     public static void main(String[] args) {
-        int [] arr = {8,3,1,2};
+        int [] arr = {1,2,3};
 
-        System.out.println(getWays( 3, arr));
+        System.out.println(getWays( 4, arr));
     }
 
 }
