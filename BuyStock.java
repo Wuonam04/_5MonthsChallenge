@@ -16,7 +16,7 @@ public class BuyStock {
 
     public static int maxProfit(int[] prices) {
 
-        int n = prices.length;
+        int n = prices.length;   
         int profit = 0;
                                         //Method is too slow
         for(int i = 0; i < n; i++){
