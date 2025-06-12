@@ -20,6 +20,7 @@ jobs:
               uses: super-linter/super-linter@v7.4.0
               env:
                  DEFAULT_BRANCH: main
+                 VALIDATE_ALL_CODEBASE: true
                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
              
             
